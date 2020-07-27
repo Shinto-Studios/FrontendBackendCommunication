@@ -16,6 +16,8 @@ namespace BackendFrontendCommunication
         {
             InitializeComponent();
 
+            //POGU
+
             //KEKW
         }
     }
