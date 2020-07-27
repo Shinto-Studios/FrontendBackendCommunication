@@ -15,8 +15,6 @@ namespace BackendFrontendCommunication
         public Form1()
         {
             InitializeComponent();
-
-            //yeet
         }
     }
 }
