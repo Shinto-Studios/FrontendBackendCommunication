@@ -7,18 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ServerAPIStuff;
 
 namespace BackendFrontendCommunication
 {
     public partial class Form1 : Form
     {
+        private ServerAPI apiRequest;
+
         public Form1()
         {
             InitializeComponent();
 
-            //POGU
+            apiRequest = new ServerAPI();
+        }
 
-            //KEKW
+        private void button1_Click(object sender, EventArgs e)
+        {
+            apiRequest.RegisterUser(textBox1.Text, textBox2.Text);
         }
     }
 }
