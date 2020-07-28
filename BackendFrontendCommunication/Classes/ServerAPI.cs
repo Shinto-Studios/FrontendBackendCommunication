@@ -25,7 +25,7 @@ namespace ServerAPIStuff
             httpClient = new HttpClient();
         }
 
-        public async void RegisterUser(string username, string password)
+        public async void RegisterUser(string username, string password, Action<string> callback = null)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
@@ -37,10 +37,13 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            MessageBox.Show("Server Response: " + reader.ReadToEnd());
+            if(callback != null)
+            {
+                callback(reader.ReadToEnd());
+            }
         }
 
-        public async void LoginUser(string username, string password)
+        public async void LoginUser(string username, string password, Action<string> callback = null)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
@@ -52,7 +55,10 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            MessageBox.Show("Server Response: " + reader.ReadToEnd());
+            if (callback != null)
+            {
+                callback(reader.ReadToEnd());
+            }
         }
     }
 }
