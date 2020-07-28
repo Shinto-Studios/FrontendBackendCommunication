@@ -13,7 +13,7 @@ namespace BackendFrontendCommunication
 {
     public partial class Form1 : Form
     {
-        private ServerAPI apiRequest;
+        private readonly ServerAPI apiRequest;
 
         public Form1()
         {
@@ -25,6 +25,11 @@ namespace BackendFrontendCommunication
         private void button1_Click(object sender, EventArgs e)
         {
             apiRequest.RegisterUser(textBox1.Text, textBox2.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            apiRequest.LoginUser(textBox1.Text, textBox2.Text);
         }
     }
 }

@@ -11,11 +11,11 @@ namespace ServerAPIStuff
 {
     class ServerAPI
     {
-        private string website = "https://amdigg.com/fbc/";
-        private Uri websiteRegister;
-        private Uri websiteLogin;
+        private readonly string website = "https://shintostudios.net/fbc/";
+        private readonly Uri websiteRegister;
+        private readonly Uri websiteLogin;
 
-        private HttpClient httpClient;
+        private readonly HttpClient httpClient;
 
         public ServerAPI()
         {
@@ -34,6 +34,21 @@ namespace ServerAPIStuff
             });
 
             HttpResponseMessage response = await httpClient.PostAsync(websiteRegister, postValues);
+
+            StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+
+            MessageBox.Show("Server Response: " + reader.ReadToEnd());
+        }
+
+        public async void LoginUser(string username, string password)
+        {
+            FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password)
+            });
+
+            HttpResponseMessage response = await httpClient.PostAsync(websiteLogin, postValues);
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
