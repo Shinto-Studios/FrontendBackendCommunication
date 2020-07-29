@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Windows.Forms;
 
 namespace ServerAPIStuff
 {
@@ -14,6 +10,8 @@ namespace ServerAPIStuff
         private readonly string website = "https://shintostudios.net/fbc/";
         private readonly Uri websiteRegister;
         private readonly Uri websiteLogin;
+        private readonly Uri websiteFetch;
+        private readonly Uri websiteLogout;
 
         private readonly HttpClient httpClient;
 
@@ -21,6 +19,8 @@ namespace ServerAPIStuff
         {
             websiteRegister = new Uri(website + "register.php");
             websiteLogin = new Uri(website + "login.php");
+            websiteFetch = new Uri(website + "fetch.php");
+            websiteLogout = new Uri(website + "logout.php");
 
             httpClient = new HttpClient();
         }
@@ -37,10 +37,7 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            if(callback != null)
-            {
-                callback(reader.ReadToEnd());
-            }
+            callback?.Invoke(reader.ReadToEnd());
         }
 
         public async void LoginUser(string username, string password, Action<string> callback = null)
@@ -55,10 +52,30 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            if (callback != null)
+            callback?.Invoke(reader.ReadToEnd());
+        }
+
+        public async void FetchUser(string username, Action<string> callback)
+        {
+            FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
-                callback(reader.ReadToEnd());
-            }
+                new KeyValuePair<string, string>("username", username)
+            });
+
+            HttpResponseMessage response = await httpClient.PostAsync(websiteFetch, postValues);
+
+            StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+
+            callback(reader.ReadToEnd());
+        }
+
+        public async void LogoutUser(Action<string> callback = null)
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(websiteLogout);
+
+            StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+
+            callback?.Invoke(reader.ReadToEnd());
         }
     }
 }
