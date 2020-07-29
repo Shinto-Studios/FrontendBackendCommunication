@@ -43,27 +43,27 @@ namespace BFCApplication
             apiRequest.LogoutUser(OnLogoutUserDone);
         }
 
-        private void OnRegisterUserDone(string response)
+        private void OnRegisterUserDone(ServerResponse response)
         {
-            MessageBox.Show(response);
+            MessageBox.Show(response.Status);
         }
 
-        private void OnLoginUserDone(string response)
+        private void OnLoginUserDone(ServerResponse response)
         {
-            MessageBox.Show(response);
+            MessageBox.Show(response.Status);
 
             button2.Enabled = false;
             button4.Enabled = true;
         }
 
-        private void OnFetchUserDone(string response)
+        private void OnFetchUserDone(ServerResponse response)
         {
-            MessageBox.Show(response);
+            MessageBox.Show(response.Status);
         }
 
-        private void OnLogoutUserDone(string response)
+        private void OnLogoutUserDone(ServerResponse response)
         {
-            MessageBox.Show(response);
+            MessageBox.Show(response.Status);
 
             button2.Enabled = true;
             button4.Enabled = false;

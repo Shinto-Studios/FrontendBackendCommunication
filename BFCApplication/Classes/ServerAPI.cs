@@ -1,10 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace ServerAPIStuff
 {
+    public class ServerResponse
+    {
+        public string Status { get; set; }
+        public string Username { get; set; }
+        public string Rank { get; set; }
+        public string Mail { get; set; }
+    }
+
     class ServerAPI
     {
         private readonly string website = "https://shintostudios.net/fbc/";
@@ -25,7 +34,7 @@ namespace ServerAPIStuff
             httpClient = new HttpClient();
         }
 
-        public async void RegisterUser(string username, string password, string email, Action<string> callback = null)
+        public async void RegisterUser(string username, string password, string email, Action<ServerResponse> callback = null)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
@@ -38,10 +47,10 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            callback?.Invoke(reader.ReadToEnd());
+            callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
         }
 
-        public async void LoginUser(string username, string password, Action<string> callback = null)
+        public async void LoginUser(string username, string password, Action<ServerResponse> callback = null)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
@@ -53,10 +62,10 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            callback?.Invoke(reader.ReadToEnd());
+            callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
         }
 
-        public async void FetchUser(string username, Action<string> callback)
+        public async void FetchUser(string username, Action<ServerResponse> callback)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
@@ -67,16 +76,16 @@ namespace ServerAPIStuff
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            callback(reader.ReadToEnd());
+            callback(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
         }
 
-        public async void LogoutUser(Action<string> callback = null)
+        public async void LogoutUser(Action<ServerResponse> callback = null)
         {
             HttpResponseMessage response = await httpClient.GetAsync(websiteLogout);
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            callback?.Invoke(reader.ReadToEnd());
+            callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
         }
     }
 }
