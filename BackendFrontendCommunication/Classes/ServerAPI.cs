@@ -32,8 +32,6 @@ namespace ServerAPIStuff
                 new KeyValuePair<string, string>("username", username),
                 new KeyValuePair<string, string>("password", password),
                 new KeyValuePair<string, string>("email", email)
-              
-             
             });
 
             HttpResponseMessage response = await httpClient.PostAsync(websiteRegister, postValues);
