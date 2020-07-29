@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendFrontendCommunication", "BackendFrontendCommunication\BackendFrontendCommunication.csproj", "{F4641902-6083-4424-A02F-4EE7F2BDF2F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFCApplication", "BFCApplication\BFCApplication.csproj", "{F419C226-CECA-4E6F-8FEB-FD872E60D01B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F4641902-6083-4424-A02F-4EE7F2BDF2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4641902-6083-4424-A02F-4EE7F2BDF2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4641902-6083-4424-A02F-4EE7F2BDF2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4641902-6083-4424-A02F-4EE7F2BDF2F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F419C226-CECA-4E6F-8FEB-FD872E60D01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F419C226-CECA-4E6F-8FEB-FD872E60D01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F419C226-CECA-4E6F-8FEB-FD872E60D01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F419C226-CECA-4E6F-8FEB-FD872E60D01B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {09D79A18-5F78-4CDE-BDC3-45448BF32E97}
+		SolutionGuid = {8D6746C2-D040-45C7-9564-44A2DD317BC2}
 	EndGlobalSection
 EndGlobal
