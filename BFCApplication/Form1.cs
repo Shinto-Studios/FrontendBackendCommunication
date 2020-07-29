@@ -52,13 +52,22 @@ namespace BFCApplication
         {
             MessageBox.Show(response.Status);
 
-            button2.Enabled = false;
-            button4.Enabled = true;
+            if(response.Status == "Login success")
+            {
+                MessageBox.Show("ID: " + response.ID);
+
+                button2.Enabled = false;
+                button4.Enabled = true;
+            }
         }
 
         private void OnFetchUserDone(ServerResponse response)
         {
             MessageBox.Show(response.Status);
+            MessageBox.Show(response.Username);
+            MessageBox.Show(response.ID);
+            MessageBox.Show(response.Mail);
+            MessageBox.Show(response.Rank);
         }
 
         private void OnLogoutUserDone(ServerResponse response)

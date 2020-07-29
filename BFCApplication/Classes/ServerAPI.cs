@@ -12,6 +12,7 @@ namespace ServerAPIStuff
         public string Username { get; set; }
         public string Rank { get; set; }
         public string Mail { get; set; }
+        public string ID { get; set; }
     }
 
     class ServerAPI
@@ -69,7 +70,7 @@ namespace ServerAPIStuff
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("username", username)
+                new KeyValuePair<string, string>("login", username)
             });
 
             HttpResponseMessage response = await httpClient.PostAsync(websiteFetch, postValues);
