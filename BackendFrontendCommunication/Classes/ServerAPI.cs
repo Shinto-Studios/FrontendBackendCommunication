@@ -25,12 +25,15 @@ namespace ServerAPIStuff
             httpClient = new HttpClient();
         }
 
-        public async void RegisterUser(string username, string password, Action<string> callback = null)
+        public async void RegisterUser(string username, string password, string email, Action<string> callback = null)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("username", username),
-                new KeyValuePair<string, string>("password", password)
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("email", email)
+              
+             
             });
 
             HttpResponseMessage response = await httpClient.PostAsync(websiteRegister, postValues);
@@ -44,7 +47,7 @@ namespace ServerAPIStuff
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("login", username),
                 new KeyValuePair<string, string>("password", password)
             });
 

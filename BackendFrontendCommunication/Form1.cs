@@ -25,7 +25,7 @@ namespace BackendFrontendCommunication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            apiRequest.RegisterUser(textBox1.Text, textBox2.Text, OnRegisterUserDone);
+            apiRequest.RegisterUser(textBox1.Text, textBox2.Text, textBox3.Text, OnRegisterUserDone);
         }
 
         private void button2_Click(object sender, EventArgs e)
