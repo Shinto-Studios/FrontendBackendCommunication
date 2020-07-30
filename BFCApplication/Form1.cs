@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -58,8 +57,6 @@ namespace BFCApplication
 
             if(response.Status == "Login success")
             {
-                //MessageBox.Show("ID: " + response.ID);
-
                 button2.Enabled = false;
                 button4.Enabled = true;
 
@@ -79,12 +76,6 @@ namespace BFCApplication
 
         private void OnFetchUserDone(ServerResponse response)
         {
-            /*MessageBox.Show(response.Status);
-            MessageBox.Show(response.Username);
-            MessageBox.Show(response.ID);
-            MessageBox.Show(response.Mail);
-            MessageBox.Show(response.Rank);*/
-
             //Fetch Label responses
             id_label.Text = "ID: " + response.ID;
             name_label.Text = "Username: " + response.Username;

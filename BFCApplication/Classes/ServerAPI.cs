@@ -66,15 +66,12 @@ namespace ServerAPIStuff
             callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
         }
 
-        //public async void FetchUser(string username, string email, string id, string rank, Action<ServerResponse> callback)
+        
         public async void FetchUser(string username, Action<ServerResponse> callback)
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("login", username),
-                /*new KeyValuePair<string, string>("email", email),
-                new KeyValuePair<string, string>("id", id),
-                new KeyValuePair<string, string>("rank", rank)*/
             });
 
             HttpResponseMessage response = await httpClient.PostAsync(websiteFetch, postValues);
