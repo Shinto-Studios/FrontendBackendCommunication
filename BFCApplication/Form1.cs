@@ -21,6 +21,9 @@ namespace BFCApplication
             InitializeComponent();
 
             apiRequest = new ServerAPI();
+
+            label7.Visible = true;
+            label7.Text = "Not logged in";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,20 +57,36 @@ namespace BFCApplication
 
             if(response.Status == "Login success")
             {
-                MessageBox.Show("ID: " + response.ID);
-
                 button2.Enabled = false;
                 button4.Enabled = true;
+
+                //Login labels response 
+                label4.Text = "ID: " + response.ID;
+                label5.Text = "Username: " + response.Username;
+                label6.Text = "Mail: " + response.Mail;
+                label7.Text = "Rank: " + response.Rank;
+
+                //Making login labels visible 
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                
             }
         }
 
         private void OnFetchUserDone(ServerResponse response)
         {
-            MessageBox.Show(response.Status);
-            MessageBox.Show(response.Username);
-            MessageBox.Show(response.ID);
-            MessageBox.Show(response.Mail);
-            MessageBox.Show(response.Rank);
+            //Fetch Label responses
+            id_label.Text = "ID: " + response.ID;
+            name_label.Text = "Username: " + response.Username;
+            email_label.Text = "Email: " + response.Mail;
+            rank_label.Text = "Rank: " + response.Rank;
+
+            //Making Fetch Label visible 
+            id_label.Visible = true;
+            name_label.Visible = true;
+            email_label.Visible = true;
+            rank_label.Visible = true;
         }
 
         private void OnLogoutUserDone(ServerResponse response)
@@ -76,6 +95,20 @@ namespace BFCApplication
 
             button2.Enabled = true;
             button4.Enabled = false;
+
+            //Fetch labels
+            id_label.Visible = false;
+            name_label.Visible = false;
+            email_label.Visible = false;
+            rank_label.Visible = false;
+            
+            //Login labels
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+
+            //Not logged in label
+            label7.Text = "Not logged in";
         }
     }
 }
