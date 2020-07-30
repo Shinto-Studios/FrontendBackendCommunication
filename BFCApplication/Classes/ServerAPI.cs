@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace ServerAPIStuff
 
         public ServerAPI()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
             websiteRegister = new Uri(website + "register.php");
             websiteLogin = new Uri(website + "login.php");
             websiteFetch = new Uri(website + "fetch.php");
