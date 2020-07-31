@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
+using System.Windows.Forms;
 
 namespace ServerAPIStuff
 {
@@ -59,17 +60,27 @@ namespace ServerAPIStuff
         {
             FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("username", username),
-                new KeyValuePair<string, string>("password", password),
-                new KeyValuePair<string, string>("email", email)
+                new KeyValuePair<string, string>("username", username.Trim()),
+                new KeyValuePair<string, string>("password", password.Trim()),
+                new KeyValuePair<string, string>("email", email.Trim())
             });
 
-            HttpResponseMessage response = await httpClient.PostAsync(websiteRegister, postValues);
+            HttpResponseMessage response = await httpClient.PostAsync(websiteUpdate, postValues);
 
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
-            callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
+            string content = reader.ReadToEnd();
 
+            MessageBox.Show(content);
+
+            try
+            {
+                callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(content));
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
         }
 
         public async void LoginUser(string username, string password, Action<ServerResponse> callback = null)
