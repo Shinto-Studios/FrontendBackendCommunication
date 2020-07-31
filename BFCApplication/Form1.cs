@@ -24,6 +24,13 @@ namespace BFCApplication
 
             label7.Visible = true;
             label7.Text = "Not logged in";
+
+            button4.Visible = false;
+            button6.Visible = false;
+
+            textBox4.Visible = false;
+            textBox5.Visible = false;
+            textBox6.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,6 +53,21 @@ namespace BFCApplication
             apiRequest.LogoutUser(OnLogoutUserDone);
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            textBox4.Visible = true;
+            textBox5.Visible = true;
+            textBox6.Visible = true;
+
+            button6.Visible = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            apiRequest.ChangeUserInfo(textBox4.Text, textBox5.Text, textBox6.Text, OnSaveUserChanges);
+        }
+
         private void OnRegisterUserDone(ServerResponse response)
         {
             MessageBox.Show(response.Status);
@@ -57,8 +79,11 @@ namespace BFCApplication
 
             if(response.Status == "Login success")
             {
-                button2.Enabled = false;
+                //button2.Enabled = false;
+                button2.Visible = false; 
                 button4.Enabled = true;
+                button4.Visible = true;
+                button1.Visible = false;
 
                 //Login labels response 
                 label4.Text = "ID: " + response.ID;
@@ -89,12 +114,33 @@ namespace BFCApplication
             rank_label.Visible = true;
         }
 
+        private void OnChangeUserSettingsDone(ServerResponse response)
+        {
+            textBox4.Visible = true;
+            textBox5.Visible = true;
+            textBox6.Visible = true;
+
+            button6.Visible = true;
+        }
+
+        private void OnSaveUserChanges(ServerResponse response)
+        {
+            textBox4.Visible = false;
+            textBox5.Visible = false;
+            textBox6.Visible = false;
+
+            button6.Visible = false;
+        }
+
         private void OnLogoutUserDone(ServerResponse response)
         {
             MessageBox.Show(response.Status);
 
             button2.Enabled = true;
             button4.Enabled = false;
+            button2.Visible = true;
+            button4.Visible = false;
+            button1.Visible = true;
 
             //Fetch labels
             id_label.Visible = false;

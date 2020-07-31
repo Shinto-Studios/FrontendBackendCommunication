@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace ServerAPIStuff
 {
@@ -23,6 +24,7 @@ namespace ServerAPIStuff
         private readonly Uri websiteLogin;
         private readonly Uri websiteFetch;
         private readonly Uri websiteLogout;
+        private readonly Uri websiteUpdate;
 
         private readonly HttpClient httpClient;
 
@@ -32,6 +34,7 @@ namespace ServerAPIStuff
             websiteLogin = new Uri(website + "login.php");
             websiteFetch = new Uri(website + "fetch.php");
             websiteLogout = new Uri(website + "logout.php");
+            websiteUpdate = new Uri(website + "update.php");
 
             httpClient = new HttpClient();
         }
@@ -50,6 +53,23 @@ namespace ServerAPIStuff
             StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
 
             callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
+        }
+
+        public async void ChangeUserInfo(string username, string password, string email, Action<ServerResponse> callback = null)
+        {
+            FormUrlEncodedContent postValues = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("email", email)
+            });
+
+            HttpResponseMessage response = await httpClient.PostAsync(websiteRegister, postValues);
+
+            StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+
+            callback?.Invoke(JsonSerializer.Deserialize<ServerResponse>(reader.ReadToEnd()));
+
         }
 
         public async void LoginUser(string username, string password, Action<ServerResponse> callback = null)
